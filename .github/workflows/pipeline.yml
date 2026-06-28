@@ -52,14 +52,14 @@ jobs:
           title: "Build failure!"
           description: |
             **Repository:** ${{ github.repository }}
-            **Branch:** ${{ github.ref_name }}
+            **Branch:** ${{ github.head_ref || github.ref_name }}
             **Commit:** ${{ github.sha }}
-            **Message:** `${{ github.event.head_commit.message }}`
-            **Author:** `${{ github.event.head_commit.author.name }}`
+            **Message:** `${{ github.event.pull_request.title || github.event.head_commit.message }}`
+            **Author:** `${{ github.event.pull_request.user.login || github.event.head_commit.author.name }}`
             **Workflow:** ${{ github.workflow }}
             **Job:** ${{ github.job }}
 
-            [View commit](`${{ github.event.head_commit.url }}`) 
+            [View commit](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
             [View Workflow Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
           color: 0xFF0000
   tag_release:
