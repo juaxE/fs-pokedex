@@ -41,8 +41,8 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           description: |
             **Commit:** ${{ github.sha }}
-            **Message:** `${{ github.event.commits.message }}`
-            **Author:** `${{ github.event.commits.author.name }}`
+            **Message:** `${{ github.event.head_commit.message }}`
+            **Author:** `${{ github.event.head_commit.author.name }}`
       - name: Build failure notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() }}
@@ -54,12 +54,12 @@ jobs:
             **Repository:** ${{ github.repository }}
             **Branch:** ${{ github.ref_name }}
             **Commit:** ${{ github.sha }}
-            **Message:** `${{ github.event.commits.message }}`
-            **Author:** `${{ github.event.commits.author.name }}`
+            **Message:** `${{ github.event.head_commit.message }}`
+            **Author:** `${{ github.event.head_commit.author.name }}`
             **Workflow:** ${{ github.workflow }}
             **Job:** ${{ github.job }}
 
-            [View commit](`${{ github.event.commits.url }}`) 
+            [View commit](`${{ github.event.head_commit.url }}`) 
             [View Workflow Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
           color: 0xFF0000
   tag_release:
