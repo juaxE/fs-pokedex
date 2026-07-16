@@ -14,10 +14,10 @@ let healthCheckCount = 0
 
 app.get('/health', (req, res) => {
   healthCheckCount++
-  if (healthCheckCount > 10) {
-    res.send('ok')
+  if (healthCheckCount <= 10) {
+    return res.send('ok')
   }
-  res.status(500).send('Break on purpose')
+  return res.status(500).send('Break on purpose')
 })
 
 const start = async () => {
