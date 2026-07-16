@@ -44,6 +44,7 @@ jobs:
           if: ${{ github.event_name == 'push' }}
   notify_failure:
     runs-on: ubuntu-latest
+    needs: [build_and_test, deploy]
     steps:
       - name: Build failure notification
         uses: sarisia/actions-status-discord@v1
