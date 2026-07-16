@@ -10,9 +10,14 @@ app.get('/version', (req, res) => {
   res.send('2') // change this string to ensure a new version deployed
 })
 
+let healthCheckCount = 0
 
 app.get('/health', (req, res) => {
-  res.send('ok')
+  healthCheckCount++
+  if (healthCheckCount > 10) {
+    res.send('ok')
+  }
+  res.status(500).send('Break on purpose')
 })
 
 const start = async () => {
